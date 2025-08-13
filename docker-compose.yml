@@ -1,0 +1,17 @@
+services:
+  backend:
+    image: sharifmrahat/localama-backend:latest
+    ports:
+      - "5000:5000"
+    network_mode: host
+    environment:
+      - PORT=5000
+
+  frontend:
+    image: sharifmrahat/localama-frontend:latest
+    ports:
+      - "3000:3000"
+    environment:
+      - API_URL=http://backend:5000
+    depends_on:
+      - backend
