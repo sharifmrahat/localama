@@ -1,117 +1,192 @@
-# 📚 Project Documentation
+# Localama
 
-Welcome to the official documentation for **Your Project Name**.  
-This guide will walk you through installation, running the app, and contributing.
+**Localama** is a lightweight AI chat application for running [Ollama](https://ollama.com/) models locally. It provides a clean, responsive chat interface with real-time streaming, enabling seamless interaction with large language models directly on your machine.
 
----
+## 📦 Installation
 
-## 📦 Installation Guidelines
+#### Prerequisites:
 
-### 1️⃣ Install and Run Ollama
+| Model Size | Minimum RAM |
+| ---------- | ----------- |
+| 7B         | 8 GB        |
+| 13B        | 16 GB       |
+| 33B        | 32 GB       |
 
-- Install Ollama in your machine from: https://ollama.com/
+- Install **Ollama** and download at least one model.
+- Check [Ollama Documentation](https://ollama.com/download) or [GitHub Repository](https://github.com/ollama/ollama) for the latest updates.
+- Install [Bun](https://bun.com/) to run frontend.
 
-### 2️⃣ Download Model
+### 1️⃣ Step-1 : Install Ollama
 
-- Download model: https://ollama.com/search
-- Note: You should have at least 8 GB of RAM available to run the 7B models, 16 GB to run the 13B models, and 32 GB to run the 33B models.
+Install Ollama in your machine from [here](https://ollama.com/download)
+
+Test Run ollama:
+
+```bash
+ollama serve
+```
+
+_Note: Ollama should run in: `http://localhost:11434/`_
+
+### 2️⃣ Step-2: Pull Model
+
+Get Ollama model from [here](https://ollama.com/search)
+
+Pull your model:
 
 ```bash
 ollama pull <model-name>
 ```
 
-- Check available models:
+Check available models (optional):
 
 ```bash
 ollama list
 ```
 
-## 🖥️ Running the Application
-
-### Manual Setup
-
-- Run the Frontend and Backend separately after cloning from GitHub.
-- Backend:
+Test run your model (optional):
 
 ```bash
-git clone https://github.com/sharifmrahat/localama-api.git
-cd localama-api
-npm install
-npm run start:dev
+ollama pull <model-name>
 ```
 
-- Frontend:
+### 3️⃣ Step-3: Run Application
+
+| Method     | Description                                          |
+| ---------- | ---------------------------------------------------- |
+| **Docker** | Run both frontend and backend together.              |
+| **Manual** | Run frontend and backend separately on your machine. |
+
+---
+
+#### Method-1: Docker Setup (Recommended)
+
+Run both frontend and backend together using Docker Compose. Install [Docker](https://docs.docker.com/get-docker/) and [ Docker Compose](https://docs.docker.com/compose/install/). And then Clone this repository for docker script:
 
 ```bash
-git clone https://github.com/sharifmrahat/localama-fe.git
-cd localama-fe
-bun install
-bun run dev
-```
-
-### Docker Setup
-
-- Run both FE and BE together using Docker Compose.
-- Prerequisites:
-- Docker installed: https://docs.docker.com/get-docker/
-- Docker Compose installed: https://docs.docker.com/compose/install/
-
-1. **Clone this repository**:
-
-````bash
 git clone https://github.com/sharifmrahat/localama.git
 cd localama
+
 ```
 
-2. **Run docker compose**:
+Run docker compose:
+
 ```bash
 docker-compose up -d
-````
-
-3. **Stop the services**:
-
-```bash
-docker-compose down
 ```
 
-4. **Check the status**
+Check the status:
 
 ```bash
 docker ps
 ```
 
-## 🛠 Tech Stack
+To stop the services:
 
-- Frontend: SvelteKit, Bun, TailwindCSS, Shadcn
-- Backend: NestJS, Node.js, Ollama, SSE
-- Tools: Docker & Docker Compose
+```bash
+docker-compose down
+```
+
+**Backend:** `http://localhost:5000/`
+
+**Frontend:** `http://localhost:3000/`
+
+---
+
+#### Method-2: Manual Setup
+
+Run the Frontend and Backend separately after cloning from GitHub.
+
+_Note: To run the frontend with [Bun](https://bun.com/) you've to install it in your machine. You can also use NPM._
+
+#### Backend Setup:
+
+Clone backend repository:
+
+```bash
+git clone https://github.com/sharifmrahat/localama-api.git
+cd localama-api
+```
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Run backend service:
+
+```bash
+npm run start:dev
+```
+
+**Backend:** `http://localhost:5000/`
+
+---
+
+#### Frontend setup:
+
+Clone frontend repository:
+
+```bash
+git clone https://github.com/sharifmrahat/localama-fe.git
+cd localama-fe
+```
+
+Install dependencies:
+
+```bash
+bun install
+```
+
+Run frontend:
+
+```bash
+bun run dev
+```
+
+**Frontend:** `http://localhost:5173/`
+
+## 🚀 Tech Stack
+
+- Ollama (LLM)
+- Node.js
+- NestJS
+- SSE
+- Bun
+- Svelte
+- Tailwind
+- Shadcn
+- TypeScript
+- Vite
+- Docker
 
 ## ✨ Features
 
-- 🚀 AI-powered processing
+- **AI-Powered Chat** – Interact seamlessly with large language models running locally.
+- **Responsive UI/UX** – Clean, intuitive interface optimized for both desktop and mobile.
+- **Streaming Communication** – Unidirectional real-time updates via Server-Sent Events (SSE).
+- **Text-to-Speech** – Listen to AI responses in natural-sounding voice.
+- **Voice-to-Text** – Speak your messages and let the app convert them to text.
+- **In-Memory Chat History** – Keep conversations accessible during the session without persistent storage.
+- **Fast and Lightweight** – Built with Bun for high performance and minimal overhead.
+- **Local-First Privacy** – All processing happens on your machine, keeping your data private.
+- **Multi-Model Support** – Easily experiment with different Ollama models running locally.
 
-- 🖥 Modern and responsive UI
+## 📈 Areas of Enhancement
 
-- 🔗 Seamless FE & BE integration
-
-- 🐳 Docker support
-
-- 📦 Bun-powered fast builds
-
-<!-- ## 📈 Areas of Enhancement
-
-
-Improve real-time data streaming
-
-Optimize database queries
-
-Enhance UI/UX with animations
-
-Add unit and integration tests -->
+- **Real-Time Streaming** – Improve the speed and reliability of live data updates.
+- **Database Integration**: Store users and sessions in local database instead of using in-memory storage.
+- **UI/UX Enhancements** – Add animations and interactive elements for a smoother user experience.
+- **Testing & Reliability\*** – Implement comprehensive unit and integration tests to ensure stability.
+- **Scalability** – Support larger models and multiple simultaneous sessions efficiently.
+- **Voice Features** – Improve accuracy and responsiveness for text-to-speech and voice-to-text interactions.
 
 ## 🤝 Contribution
 
 - Fork the repository
 - Create a feature branch (git checkout -b feature-name)
 - Commit changes (git commit -m 'Add feature')
-- Push and open a PR
+- Push and create a PR
+
+**Owner**: [Sharif](https://www.linkedin.com/in/sharifmrahat/)
